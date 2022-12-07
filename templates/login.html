@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+     <style>
+
+        body{
+            background-image: url("{% static 'books_bg.jpg' %}");
+            background-color: cadetblue;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color:white;
+            backdrop-filter: brightness(50%);
+            background-blend-mode: multiply;
+
+        }
+
+    </style>
+
+    <div class="row">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4" style="min-height: 100vh">
+            <h6 class="text-white">Login</h6>
+            <form action="/login/" method="post">
+                {% csrf_token %}
+                <input name="username" placeholder="username" type="text" class="form-control m mb-3">
+                <input name="password" placeholder="username" type="text" class="form-control m mb-3">
+                <input type="submit" value="Login" class="btn btn-success">
+            </form>
+            <p class="m mt-4 text-white">Create New Account - <a href="/register">Register</a></p>
+            <p class="text-warning">{{ msg }}</p>
+        </div>
+    </div>
+
+
+{% endblock %}

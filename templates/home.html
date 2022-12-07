@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+{% load tags %}
+
+{% block content %}
+
+    <div class="row">
+    {% if request.user.is_authenticated %}
+
+    {% else %}
+        <div class="col-md-12 d-flex justify-content-end">
+        <a class="text-warning" href="{% url 'login' %}">Log In</a>
+    </div>
+    {% endif %}
+</div>
+
+
+    <div class="row">
+    <div class="col-md-12">
+     <table class="table table-striped">
+        <thead>
+            <tr><th>Book ID</th><th>Book</th><th>Author</th><th>Available</th></tr>
+        </thead>
+            <tbody>
+        {% for x in data %}
+            <tr>
+                <td>{{ x.book_id }}</td><td>{{ x.book_title }}</td><td>{{ x.author }}</td>
+                <td>
+                    {% if x.available_quantity > 0 %}
+                        {{ x.available_quantity }}
+                        {% else %}
+                        {{ x.book_id | check }}
+                    {% endif %}
+                </td>
+            </tr>
+         {% endfor %}
+       </tbody>
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block  content %}
+
+     <style>
+
+        body{
+            background-image: url("{% static 'books_bg.jpg' %}");
+            background-color: cadetblue;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color:white;
+            backdrop-filter: brightness(50%);
+            background-blend-mode: multiply;
+
+        }
+         ul{display: none}
+
+    </style>
+
+<div class="row">
+<div class="col-md-4"></div>
+<div class="col-md-4" style="height: 100vh">
+    <form action="" method="post">
+    {% csrf_token %}
+        {{ form|crispy }}
+        {% for x in form %}
+        {% endfor %}
+        <input type="submit" value="Submit" class=" btn btn-success">
+    </form>
+<p>Already have an account <a href="/">Login</a></p>
+<p class="m mt-2" style="font-weight: lighter"><b class="text-success">Note: </b>Dear students please use your 'Roll No' as username to avoid account block</p>
+</div>
+</div>
+{% endblock %}

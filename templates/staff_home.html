@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+
+    <div class="row">
+    {% if request.user.is_authenticated %}
+        <div class="col-md-12 d-flex justify-content-end">
+        <a class="text-warning" style="margin-right: 10px" href="">Hello..{{ request.user }}</a>
+        <a class="text-warning" href="{% url 'logout' %}">Log Out</a>
+    </div>
+    {% else %}
+        <div class="col-md-12 d-flex justify-content-end">
+        <a class="text-warning" href="{% url 'login' %}">Log In</a>
+    </div>
+    {% endif %}
+</div>
+
+    <div class="row">
+    <div class="col-md-4">
+        <h5>Allot Book</h5>
+        <form method="post" action="">
+            {% csrf_token %}
+             {{ form }}
+        <input name="allot" type="submit" value="Allot" class="btn btn-danger m mt-2">
+        </form>
+        <p>{{ message }}</p>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+
+    </div>
+    </div>
+
+{% endblock %}
+

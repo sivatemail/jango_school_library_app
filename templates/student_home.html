@@ -1,0 +1,45 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+    <div class="row">
+    {% if request.user.is_authenticated %}
+        <div class="col-md-12 d-flex justify-content-end">
+        <a class="text-warning" style="margin-right: 10px" href="">My Books</a>
+        <a class="text-warning" href="{% url 'logout' %}">Log Out</a>
+    </div>
+    {% else %}
+        <div class="col-md-12 d-flex justify-content-end">
+        <a class="text-warning" href="{% url 'login' %}">Log In</a>
+    </div>
+    {% endif %}
+</div>
+
+    <div class="row">
+    <div class="col-md-12">
+
+        <table class="table table-striped">
+        <thead>
+            <tr><th>Book ID</th><th>Book</th><th>Author</th><th>Return By</th><th>Action</th></tr>
+        </thead>
+            <tbody>
+        {% for x in books %}
+            <tr>
+                <td>{{ x.book.book_id }}</td><td>{{ x.book.book_title }}</td><td>{{ x.book.author }}</td>
+                <td>{{ x.return_date }}</td>
+                <td>{% if x.renewal_status == False %}
+                    <form method="post" action="">{% csrf_token %} <input style="display: none" name="book_id" type="text" value="{{ x.book.book_id }}"><input name="renew" class="btn btn-link" value="Renew" type="submit"></form>
+                    {% else %}
+                    <span>-</span>
+                    {% endif %}
+                </td>
+            </tr>
+         {% endfor %}
+       </tbody>
+        </table>
+
+    </div>
+    </div>
+
+
+{% endblock %}
